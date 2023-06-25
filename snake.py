@@ -77,7 +77,7 @@ starting = score
 applePos = (0, 0)
 newApple()
 
-#g ame loop
+# game loop
 while True:
     clear()
     renderGrid()
