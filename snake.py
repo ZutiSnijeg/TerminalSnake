@@ -1,4 +1,6 @@
 # A simple terminal based snake clone
+
+# Import everything
 import os
 import random
 from pytimedinput import timedInput
@@ -12,14 +14,13 @@ green = Back.GREEN
 yellow = Back.YELLOW
 white = Back.WHITE
 reset = Back.BLACK
-grey = Back.WHITE
 
 # Print everything in terminal
 def renderGrid():
     for r in range(HEIGHT):
         for c in range(WIDTH):
             if c in [0, WIDTH - 1] or r in [0, HEIGHT - 1]: # Draw edge
-                print(grey + "  " + reset, end = "")
+                print(white + "  " + reset, end = "")
             elif (c, r) == applePos: # Draw apple
                 print(red +"  ", end = "")
             elif (c, r) in snake:
@@ -62,31 +63,32 @@ def getDir(direction):
         return direction
     return newDirection
 
-#settings
+# settings
 WIDTH = 32
 HEIGHT = 32
 FPS = 10
 
-#setup
+# setup
 DIRECTIONS = {"a": (-1, 0), "d": (1, 0), "w": (0, -1), "s": (0, 1), "q": (0, 0), "h": (-1, -1)}
 direction = DIRECTIONS["a"]
 snake = [(WIDTH // 2, HEIGHT // 2), (WIDTH // 2 + 1, HEIGHT // 2), (WIDTH // 2 + 1, HEIGHT // 2 + 1)]
-score = len(snake)
+score = len(snake) # This is not the score of that will be displayed in the "end game message" but insted the variable used to keep track of your snakes length
 starting = score
 applePos = (0, 0)
 newApple()
-#game loop
+
+#g ame loop
 while True:
     clear()
     renderGrid()
     direction = getDir(direction)
-    if updateSnake() == 2 or direction == (0, 0): #end the game
+    if updateSnake() == 2 or direction == (0, 0): # end the game
         clear()
         break
-    if direction == (-1, -1): #display help menu
+    if direction == (-1, -1): # display help menu
         clear()
         print("This is a simple snake game\nyou can controll the snake with these controlls:\nw - up\na - left\ns - down\nd - right\n\nTo quit to game enter 'q'\nTo get help enter 'h'\n")
         break
 
-#end game
+# end game
 print("Svaka cast!\nVas rezultat je: " + str(score - starting))
